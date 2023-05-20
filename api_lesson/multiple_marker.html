@@ -1,54 +1,53 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Google Maps API</title>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBy5_SjUbRXayyiYVb9QaQSlRUW6CSM5Io"></script>
     <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
-</head>
+  </head>
 
-<body>
-    <div id="map" style="width: 800px; height: 600px;"></div>
+  <body>
+    <div id="map" style="width: 800px; height: 600px"></div>
 
     <script>
-        const locations = [
+      const locations = [
+        { lat: 24.808815658594536, lng: 120.97134545197073 },
+        { lat: 24.81002058890643, lng: 120.97533574217879 },
+      ];
 
-            { lat: 25.042086442177503, lng: 121.52553703890878 },
-            { lat: 24.97694804135412, lng: 121.4420051232046 },
-            { lat: 25.01841109117434, lng: 121.53832510115517 }
-        ];
+      function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 14,
+          center: { lat: 24.808024158072737, lng: 120.97312560197406 },
+        });
 
-        function initMap() {
-            const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 14,
-                center: { lat: 25.046431525811414, lng: 121.51747250593631 }
-            });
-
-            const img = "img/placeholder.png";
-            for (let i = 0; i < locations.length; i++) {
-                const marker = new google.maps.Marker({
-                    position: locations[i],
-                    map: map,
-                    tittle: "地點i",
-                    icon: img
-                });
-            }
-
-            // 創建標記
-            const markers = locations.map((position, i) => {
-                return new google.maps.Marker({
-                    position,
-                    label: `${i + 1}` // 使用數字作為標記的標籤
-                });
-            });
-
-            // 創建叢集標記
-            const markerCluster = new markerClusterer.MarkerClusterer({ map, markers });
+        const img = "img/placeholder.png";
+        for (let i = 0; i < locations.length; i++) {
+          const marker = new google.maps.Marker({
+            position: locations[i],
+            map: map,
+            tittle: "地點i",
+            icon: img,
+          });
         }
 
-        // 載入地圖
-        initMap();
-    </script>
-</body>
+        // 創建標記
+        const markers = locations.map((position, i) => {
+          return new google.maps.Marker({
+            position,
+            label: `${i + 1}`, // 使用數字作為標記的標籤
+          });
+        });
 
+        // 創建叢集標記
+        const markerCluster = new markerClusterer.MarkerClusterer({
+          map,
+          markers,
+        });
+      }
+
+      // 載入地圖
+      initMap();
+    </script>
+  </body>
 </html>
