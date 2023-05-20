@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Google Maps API 叢集標記範例</title>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBy5_SjUbRXayyiYVb9QaQSlRUW6CSM5Io"></script>
+  <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
+</head>
+<body>
+  <div id="map" style="width: 800px; height: 600px;"></div>
+
+  <script>
+    const locations = [
+      { lat:24.808815658594536, lng:120.97134545197073  },
+      { lat:24.81002058890643, lng:120.97533574217879 }
+  
+    ];
+
+    function initMap() {
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 14,
+        center: { lat: 24.808024158072737,  lng: 120.97312560197406 }
+      });
+
+      // 創建標記
+      const markers = locations.map((position, i) => {
+        return new google.maps.Marker({
+          position,
+          label: `${i + 1}` // 使用數字作為標記的標籤
+        });
+      });
+
+      // 創建叢集標記
+      const markerCluster = new markerClusterer.MarkerClusterer({ map, markers });
+    }
+
+    // 載入地圖
+    initMap();
+  </script>
+</body>
+</html>

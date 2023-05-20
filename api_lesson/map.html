@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Map API範例</title>
+
+    <style>
+        #map {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBy5_SjUbRXayyiYVb9QaQSlRUW6CSM5Io&callback=initMap">
+        </script>
+
+    <script>
+        // Initialize and add the map
+        function initMap() {
+            // The location of Uluru
+            const taipei_city = { lat: 25.042095580684492, lng: 121.52570383512186 };
+            // The map, centered at Uluru
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 18,
+                center: taipei_city,
+            });
+            // The marker, positioned at Uluru
+            const img = "img/placeholder.png"
+   
+            const marker = new google.maps.Marker({
+                position: taipei_city,
+                map: map,
+                title: "台北商業大學",
+                icon: img
+            });
+
+            const infowindow = new google.maps.InfoWindow({
+                content: "乖乖上課惹拉",
+                ariaLabel: "上課惹",
+            });
+
+            marker.addListener("click", () => {
+                infowindow.open({
+                    anchor: marker,
+                    map,
+                });
+            });
+        }
+
+        window.initMap = initMap;
+    </script>
+</body>
+
+</html>
